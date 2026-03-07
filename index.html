@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Magic</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* This handles the background image scaling */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.8s ease-in-out;
+            color: white; /* White text looks better over images */
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.3); /* Darkens the image slightly for readability */
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        .magic-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .magic-button:active {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body id="bg-body" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80')">
+
+    <div class="overlay">
+        <h1 id="status">Nature Magic</h1>
+        <p>Tap the button to teleport to a new place!</p>
+        <br>
+        <button class="magic-button" onclick="changeImage()">Change Scene</button>
+    </div>
+
+    <script>
+        function changeImage() {
+            const statusText = document.getElementById('status');
+            statusText.innerText = "Teleporting...";
+
+            // Generating a random number ensures we get a fresh image every time
+            const randomID = Math.floor(Math.random() * 1000);
+            const imageUrl = `https://picsum.photos/1080/1920?random=${randomID}`;
+            
+            // Apply the new image to the background
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+
+            // Reset text after a tiny delay
+            setTimeout(() => {
+                statusText.innerText = "New Scene Found!";
+            }, 500);
+        }
+    </script>
+
+</body>
+</html>
